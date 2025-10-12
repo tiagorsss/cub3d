@@ -6,7 +6,7 @@
 /*   By: treis-ro <treis-ro@student.42.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 18:23:02 by treis-ro          #+#    #+#             */
-/*   Updated: 2025/10/10 19:03:56 by treis-ro         ###   ########.fr       */
+/*   Updated: 2025/10/12 12:46:01 by treis-ro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,23 @@ void	render_3d(t_index *idx)
 				map_y += step_y;
 				side = 1;
 			}
+			if (map_y < 0 || map_y >= idx->map->map_height
+			|| map_x < 0 || map_x >= idx->map->map_length)
+				break;
 			if (idx->map->map[map_y][map_x] == '1')
 				hit = 1;
 		}
 
+		t_texture_img *tex;
+		if (side == 0 && ray_dir_x > 0)
+			tex = &idx->textures->we_img; // we hit a west wall (looking right)
+		else if (side == 0 && ray_dir_x < 0)
+			tex = &idx->textures->ea_img; // hit east wall (looking left)
+		else if (side == 1 && ray_dir_y > 0)
+			tex = &idx->textures->no_img; // hit north wall (looking down)
+		else
+			tex = &idx->textures->so_img;
+			
 		// Calculate distance projected on camera direction
 		if (side == 0)
 			perp_wall_dist = (side_dist_x - delta_dist_x);
@@ -96,14 +109,38 @@ void	render_3d(t_index *idx)
 		if (draw_end >= HEIGHT)
 			draw_end = HEIGHT - 1;
 
+		// Calculate exact position of wall hit
+		double wall_x;
+		if (side == 0)
+			wall_x = idx->pos->y + perp_wall_dist * ray_dir_y;
+		else
+			wall_x = idx->pos->x + perp_wall_dist * ray_dir_x;
+		wall_x -= floor(wall_x); // fractional part only (0–1)
+
+		int tex_x = (int)(wall_x * (double)tex->width);
+		if ((side == 0 && ray_dir_x > 0) || (side == 1 && ray_dir_y < 0))
+			tex_x = tex->width - tex_x - 1; // flip for certain orientations
+
+		double step = 1.0 * tex->height / line_height;
+		double tex_pos = (draw_start - HEIGHT / 2 + line_height / 2) * step;
+
 		// draw ceiling
 		for (int y = 0; y < draw_start; y++)
 			my_mlx_pixel_put(c, x, y, COL_CEIL_3D);
 
-		// draw wall
-		int wall_col = (side == 1) ? 0x888888 : 0xFFFFFF;
-		for (int y = draw_start; y <= draw_end; y++)
-			my_mlx_pixel_put(c, x, y, wall_col);
+		// Draw textured wall
+		for (int y = draw_start; y < draw_end; y++)
+		{
+			int tex_y = (int)tex_pos & (tex->height - 1);
+			tex_pos += step;
+			int color = tex->addr[(tex->line_length / 4) * tex_y + tex_x];
+		
+			// make Y-sides slightly darker for pseudo-lighting
+			if (side == 1)
+				color = (color >> 1) & 0x7F7F7F;
+		
+			my_mlx_pixel_put(c, x, y, color);
+		}
 
 		// draw floor
 		for (int y = draw_end; y < HEIGHT; y++)

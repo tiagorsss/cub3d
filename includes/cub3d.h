@@ -6,7 +6,7 @@
 /*   By: treis-ro <treis-ro@student.42.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 15:12:04 by lumiguel          #+#    #+#             */
-/*   Updated: 2025/10/10 19:09:28 by treis-ro         ###   ########.fr       */
+/*   Updated: 2025/10/12 12:50:23 by treis-ro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,31 @@ typedef struct s_cub3d
 	int		height;
 }	t_cub3d;
 
+typedef struct s_texture_img
+{
+	void	*img;
+	int		*addr;
+	int		width;
+	int		height;
+	int		bpp;
+	int		line_length;
+	int		endian;
+}	t_texture_img;
+
 typedef struct s_textures
 {
-	char	*NO;
+	char	*NO; // path
 	char	*SO;
 	char	*WE;
 	char	*EA;
 	int		*roof;
 	int		*floor;
 	bool	invalid;
+
+	t_texture_img	no_img;
+	t_texture_img	so_img;
+	t_texture_img	we_img;
+	t_texture_img	ea_img;
 }	t_textures;
 
 typedef struct s_map
@@ -162,5 +178,7 @@ void	render_3d(t_index *idx);
 // void	rotate_player(t_index *idx, double angle);
 // void	move_strafe(t_index *idx, int dir);
 // void	move_forward_backward(t_index *idx, int dir);
+
+void	load_textures(t_cub3d *cub, t_textures *tex);
 
 #endif

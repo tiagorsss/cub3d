@@ -6,15 +6,15 @@
 /*   By: treis-ro <treis-ro@student.42.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 13:41:42 by treis-ro          #+#    #+#             */
-/*   Updated: 2025/10/10 19:56:53 by treis-ro         ###   ########.fr       */
+/*   Updated: 2025/10/12 11:53:12 by treis-ro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 #include <math.h>
 
-#define RAY_COUNT 60 // number of rays to draw
-#define RAY_RANGE  20.0 
+#define RAY_COUNT 200 // number of rays to draw
+#define RAY_RANGE  60.0 
 
 static void	draw_single_ray(t_index *idx, double ray_dir_x, double ray_dir_y)
 {

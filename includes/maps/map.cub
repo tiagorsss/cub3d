@@ -1,7 +1,7 @@
-NO ./includes/textures/emptywall.xpm
-SO ./includes/textures/wallbluearcade.xpm
-WE ./includes/textures/emptywall.xpm
-EA ./includes/textures/emptywall.xpm
+NO ./includes/textures/baghee.xpm
+SO ./includes/textures/colinho.xpm
+WE ./includes/textures/pantera.xpm
+EA ./includes/textures/sukipao.xpm
 
 F 40, 40, 65
 C 0, 0, 50
@@ -27,5 +27,5 @@ C 0, 0, 50
             100010000001  100000001
             10001111100111110000001
             10000000000000000001111
-            1000N00000111111001
+            100N000000111111001
              111111111      11

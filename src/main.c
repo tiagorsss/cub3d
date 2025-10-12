@@ -6,7 +6,7 @@
 /*   By: treis-ro <treis-ro@student.42.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 15:14:49 by lumiguel          #+#    #+#             */
-/*   Updated: 2025/10/10 18:22:35 by treis-ro         ###   ########.fr       */
+/*   Updated: 2025/10/12 12:16:41 by treis-ro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	main(int ac, char **av)
 	if (index->map->invalid)
 		clean_exit_basic(index);
 	mlx_creation(index->cub3d);
+	load_textures(index->cub3d, index->textures);
 	mlx_loop_hook(index->cub3d->mlx_connection, render_frame, index);
 	mlx_hook(index->cub3d->mlx_win, 2, 1L << 0, handle_key, index);
 	mlx_hook(index->cub3d->mlx_win, 17, 0, handle_closing, index);

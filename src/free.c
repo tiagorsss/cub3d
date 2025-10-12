@@ -6,7 +6,7 @@
 /*   By: treis-ro <treis-ro@student.42.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 11:06:38 by lumiguel          #+#    #+#             */
-/*   Updated: 2025/10/10 11:55:50 by treis-ro         ###   ########.fr       */
+/*   Updated: 2025/10/12 12:19:23 by treis-ro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,13 @@ void	clean_exit(t_index *index)
 		free(index->cub3d->mlx_connection);
 	index->cub3d->mlx_connection = NULL;
 	if (index->textures)
+	{
+		mlx_destroy_image(index->cub3d->mlx_connection, index->textures->no_img.img);
+		mlx_destroy_image(index->cub3d->mlx_connection, index->textures->so_img.img);
+		mlx_destroy_image(index->cub3d->mlx_connection, index->textures->we_img.img);
+		mlx_destroy_image(index->cub3d->mlx_connection, index->textures->ea_img.img);
 		free_textures(index->textures);
+	}
 	if (index->pos)
 		free_pos(index->pos);
 	if (index->map)
