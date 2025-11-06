@@ -6,11 +6,11 @@
 /*   By: treis-ro <treis-ro@student.42.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 11:06:38 by lumiguel          #+#    #+#             */
-/*   Updated: 2025/10/12 12:19:23 by treis-ro         ###   ########.fr       */
+/*   Updated: 2025/11/05 13:58:43 by treis-ro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 void	free_index(t_index *index)
 {
@@ -97,14 +97,14 @@ void	free_textures(t_textures *tex)
 {
 	if (!tex)
 		return ;
-	if (tex->EA)
-		free(tex->EA);
-	if (tex->NO)
-		free(tex->NO);
-	if (tex->SO)
-		free(tex->SO);
-	if (tex->WE)
-		free(tex->WE);
+	if (tex->ea)
+		free(tex->ea);
+	if (tex->no)
+		free(tex->no);
+	if (tex->so)
+		free(tex->so);
+	if (tex->we)
+		free(tex->we);
 	if (tex->floor)
 		free(tex->floor);
 	if (tex->roof)

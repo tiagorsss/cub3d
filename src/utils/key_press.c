@@ -6,11 +6,11 @@
 /*   By: treis-ro <treis-ro@student.42.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 10:59:38 by lumiguel          #+#    #+#             */
-/*   Updated: 2025/10/10 14:37:44 by treis-ro         ###   ########.fr       */
+/*   Updated: 2025/11/05 13:58:56 by treis-ro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 #include <math.h>
 
 #define MOVE_SPEED 0.08

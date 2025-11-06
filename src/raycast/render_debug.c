@@ -6,11 +6,11 @@
 /*   By: treis-ro <treis-ro@student.42.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 13:41:42 by treis-ro          #+#    #+#             */
-/*   Updated: 2025/10/12 11:53:12 by treis-ro         ###   ########.fr       */
+/*   Updated: 2025/11/05 13:58:11 by treis-ro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 #include <math.h>
 
 #define RAY_COUNT 200 // number of rays to draw

@@ -1,5 +1,5 @@
 # Variables
-NAME = cub3d
+NAME = Cub3d
 CC = cc
 
 # Library Directories

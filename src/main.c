@@ -6,7 +6,7 @@
 /*   By: treis-ro <treis-ro@student.42.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 15:14:49 by lumiguel          #+#    #+#             */
-/*   Updated: 2025/10/12 12:16:41 by treis-ro         ###   ########.fr       */
+/*   Updated: 2025/11/02 17:37:28 by treis-ro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ int	main(int ac, char **av)
 		return (ft_putstr_fd("invalid arguments\n", 2), 1);
 	index = init_index();
 	if (!index)
-		return (ft_putstr_fd("error initializing\n", 2), 1);
+		return (ft_putstr_fd("Error initializing\n", 2), 1);
 	index->textures = texture_init(av[1]);
 	if (index->textures == NULL || index->textures->invalid)
-    	clean_exit_basic(index);
+		clean_exit_basic(index);
 	index->map = map_prep(av[1], index);
 	if (index->map->invalid)
 		clean_exit_basic(index);

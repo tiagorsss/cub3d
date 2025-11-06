@@ -6,7 +6,7 @@
 /*   By: treis-ro <treis-ro@student.42.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 21:48:08 by lumiguel          #+#    #+#             */
-/*   Updated: 2025/10/10 13:10:27 by treis-ro         ###   ########.fr       */
+/*   Updated: 2025/11/05 13:45:25 by treis-ro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,23 @@ t_textures	*texture_init(char *file)
 		return (printf("Error\nCannot open file\n"), NULL);
 	tex = init_textures();
 	step = 0;
-	while (step < 6 && (line = get_next_line(fd, 0)))
+	line = get_next_line(fd, 0);
+	while (step < 6 && (line != NULL))
 	{
 		if (is_empty_line(line))
 		{
 			free(line);
-			continue;
+			continue ;
 		}
 		if (!parse_texture_line(tex, line, step))
 		{
 			tex->invalid = true;
 			free(line);
-			break;
+			break ;
 		}
 		step++;
 		free(line);
+		line = get_next_line(fd, 0);
 	}
 	close(fd);
 	if (step != 6 || tex_check(tex))
@@ -53,8 +55,8 @@ t_textures	*texture_init(char *file)
 bool	parse_texture_line(t_textures *tex, char *line, int step)
 {
 	char	*ids[6] = {"NO", "SO", "WE", "EA", "F", "C"};
-	char				*trimmed;
-	
+	char	*trimmed;
+
 	while (*line == ' ' || *line == '\t')
 		line++;
 	if (ft_strncmp(line, ids[step], ft_strlen(ids[step])) != 0)
@@ -66,10 +68,14 @@ bool	parse_texture_line(t_textures *tex, char *line, int step)
 			return (false);
 		if (check_file(trimmed))
 			return (free(trimmed), false);
-		if (step == 0) tex->NO = trimmed;
-		if (step == 1) tex->SO = trimmed;
-		if (step == 2) tex->WE = trimmed;
-		if (step == 3) tex->EA = trimmed;
+		if (step == 0)
+			tex->no = trimmed;
+		if (step == 1)
+			tex->so = trimmed;
+		if (step == 2)
+			tex->we = trimmed;
+		if (step == 3)
+			tex->ea = trimmed;
 	}
 	else if (step == 4)
 	{
@@ -144,15 +150,15 @@ bool	tex_check(t_textures *tex)
 {
 	if (tex->invalid)
 		return (true);
-	if (tex->NO == NULL)
+	if (tex->no == NULL)
 		return (true);
 	if (tex->roof == NULL)
 		return (true);
-	if (tex->EA == NULL)
+	if (tex->ea == NULL)
 		return (true);
-	if (tex->SO == NULL)
+	if (tex->so == NULL)
 		return (true);
-	if (tex->WE == NULL)
+	if (tex->we == NULL)
 		return (true);
 	if (tex->floor == NULL)
 		return (true);
@@ -169,10 +175,10 @@ t_textures	*init_textures(void)
 		ft_putstr_fd("Error\nFile not right\n", STDERR_FILENO);
 		exit(EXIT_FAILURE);
 	}
-	tex->NO = NULL;
-	tex->SO = NULL;
-	tex->WE = NULL;
-	tex->EA = NULL;
+	tex->no = NULL;
+	tex->so = NULL;
+	tex->we = NULL;
+	tex->ea = NULL;
 	tex->roof = NULL;
 	tex->floor = NULL;
 	tex->invalid = false;
